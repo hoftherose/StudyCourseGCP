@@ -13,6 +13,7 @@ provider "google" {
 }
 
 resource "google_app_engine_flexible_app_version" "app" {
+  version_id = "v1"
   runtime = "custom"
   service = "default"
 
@@ -32,4 +33,17 @@ resource "google_app_engine_flexible_app_version" "app" {
   liveness_check {
     path = "/"
   }
+}
+
+resource "google_project_service" "service" {
+  project = var.project_id
+  service = "appengineflex.googleapis.com"
+
+  disable_dependent_services = false
+}
+
+resource "google_project_iam_member" "gae_api" {
+  project = var.project_id
+  role    = "roles/compute.networkUser"
+  member  = var.app_service_account
 }

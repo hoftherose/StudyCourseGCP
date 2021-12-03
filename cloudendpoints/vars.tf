@@ -17,3 +17,8 @@ variable "num_instances" {
   type    = number
   default = 1
 }
+
+variable "app_service_account" {
+  type    = string
+  default = "serviceAccount:terraformtest-333814@appspot.gserviceaccount.com"
+}
