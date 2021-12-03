@@ -8,7 +8,28 @@ terraform {
 }
 
 provider "google" {
-  project = "terraformtests-333814"
-  region  = "us-west1"
-  zone    = "us-west1-b"
+  project = var.project_id
+  region  = var.region
+}
+
+resource "google_app_engine_flexible_app_version" "app" {
+  runtime = "custom"
+  service = "default"
+
+  deployment {
+    container {
+      image = data.google_container_registry_image.app_image.image_url
+    }
+  }
+
+  manual_scaling {
+    instances = var.num_instances
+  }
+
+  readiness_check {
+    path = "/"
+  }
+  liveness_check {
+    path = "/"
+  }
 }
