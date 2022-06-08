@@ -1,5 +1,7 @@
 # Coursera courses labs with terraform.
 
+Terraform code for coursera course follow through. The only component not managed with cloud backend tfstate is the root of this folder "coursera", that is stored/managed locally but kept to a minimum in case tfstate is lost, manual maintanance will be simple.
+
 ## Coursera "Google Cloud Fundamentals"
 
 _gcp-fundamentals_
