@@ -1,0 +1,23 @@
+runtime: custom
+api_version: '1.0'
+env: flexible
+threadsafe: true
+env_variables:
+  port: '8000'
+manual_scaling:
+  instances: 2
+network: {}
+liveness_check:
+  initial_delay_sec: 300
+  path: /
+  check_interval_sec: 30
+  timeout_sec: 4
+  failure_threshold: 4
+  success_threshold: 2
+readiness_check:
+  path: /
+  check_interval_sec: 5
+  timeout_sec: 4
+  failure_threshold: 2
+  success_threshold: 2
+  app_start_timeout_sec: 300
