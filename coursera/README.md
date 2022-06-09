@@ -7,8 +7,8 @@ Terraform code for coursera course follow through. The only component not manage
 _gcp-fundamentals_
 
 - Week 1
-  - Demonstration: Getting Started with Compute Engine
-  - Demonstration: Getting Started with Cloud Storage and Cloud SQL
-  - Demo: Getting Started with Kubernetes Engine
-  - Demonstration: Getting Started with App Engine
-  - Demonstration: Getting Started with Deployment Manager and Stackdriver
+  - Demonstration: Getting Started with Compute Engine (computer-engine)
+  - Demonstration: Getting Started with Cloud Storage and Cloud SQL (storage)
+  - Demo: Getting Started with Kubernetes Engine (kubernetes)
+  - Demonstration: Getting Started with App Engine (app-engine)
+  - Demonstration: Getting Started with Deployment Manager and Stackdriver (deployment-manager)
