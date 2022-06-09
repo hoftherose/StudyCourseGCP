@@ -1,4 +1,5 @@
 resource "google_compute_instance" "default" {
+  project = var.project
   name         = "my-vm-1"
   machine_type = "n1-standard-1"
   zone         = var.zone
@@ -11,11 +12,6 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  // Local SSD disk
-#   scratch_disk {
-#     interface = "SCSI"
-#   }
-
   network_interface {
     network = "default"
 
@@ -24,11 +20,18 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  metadata_startup_script = "echo hi > /test.txt"
+  metadata_startup_script = "sudo apt update; sudo apt install nginx"
+}
 
-#   service_account {
-#     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-#     email  = var.service_account
-#     scopes = ["cloud-platform"]
-#   }
+resource "google_compute_firewall" "http" {
+  project = var.project
+  name    = "default-allow-http"
+  network = "default"
+
+  allow {
+      protocol = "tcp"
+      ports = ["80"]
+  }
+  target_tags = ["http-server"]
+  source_ranges = ["0.0.0.0/0"]
 }
