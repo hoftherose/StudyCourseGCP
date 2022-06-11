@@ -11,11 +11,12 @@ terraform {
   }
 }
 
-resource "google_project" "week_1" {
-  name       = "gcp-fundamentals-week-1"
-  project_id = "gcp-fundamentals-week-1"
-  folder_id     = var.folder_id
+resource "google_project" "fundamentals" {
+  name       = "gcp-fundamentals-${var.folder_id}"
+  project_id = "gcp-fundamentals-${var.folder_id}"
+  skip_delete = true
 
+  folder_id     = var.folder_id
   billing_account = data.google_billing_account.billing_account.id
 }
 
@@ -27,7 +28,7 @@ data "google_billing_account" "billing_account" {
 module "computer_engine" {
   source = "./modules/computer_engine"
 
-  project = google_project.week_1.project_id
+  project = google_project.fundamentals.project_id
   zone = var.zone
   region = var.region
 }
