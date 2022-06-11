@@ -13,8 +13,8 @@ resource "time_sleep" "api_init" {
 
 resource "google_compute_instance" "default" {
   project = var.project
-  name         = "my-vm-1"
-  machine_type = "n1-standard-1"
+  name         = var.instance_name
+  machine_type = var.instance_type
   zone         = var.zone
 
   tags = ["compute", "http-server"]
@@ -33,7 +33,7 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  metadata_startup_script = "apt-get update; apt-get install --no-install-recommends -y nginx"
+  metadata_startup_script = var.startup_script
 
   depends_on = [time_sleep.api_init]
 }
@@ -52,5 +52,3 @@ resource "google_compute_firewall" "http" {
 
   depends_on = [time_sleep.api_init]
 }
-
-# compute.googleapis.com
