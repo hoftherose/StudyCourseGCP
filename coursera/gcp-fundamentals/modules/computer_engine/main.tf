@@ -1,3 +1,16 @@
+resource "null_resource" "enable_service_usage_api" {
+  provisioner "local-exec" {
+    command = "gcloud services enable serviceusage.googleapis.com compute.googleapis.com --project ${var.project}"
+  }
+}
+
+resource "time_sleep" "api_init" {
+  create_duration = "15s"
+
+  depends_on = [null_resource.enable_service_usage_api]
+}
+
+
 resource "google_compute_instance" "default" {
   project = var.project
   name         = "my-vm-1"
@@ -20,7 +33,9 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  metadata_startup_script = "sudo apt update; sudo apt install nginx"
+  metadata_startup_script = "apt-get update; apt-get install --no-install-recommends -y nginx"
+
+  depends_on = [time_sleep.api_init]
 }
 
 resource "google_compute_firewall" "http" {
@@ -34,4 +49,8 @@ resource "google_compute_firewall" "http" {
   }
   target_tags = ["http-server"]
   source_ranges = ["0.0.0.0/0"]
+
+  depends_on = [time_sleep.api_init]
 }
+
+# compute.googleapis.com
