@@ -10,12 +10,9 @@ resource "time_sleep" "api_init" {
   depends_on = [null_resource.enable_service_usage_api]
 }
 
-
 resource "google_compute_instance" "default" {
-  project = var.project
   name         = var.instance_name
   machine_type = var.instance_type
-  zone         = var.zone
 
   tags = ["compute", "http-server"]
 
@@ -39,7 +36,6 @@ resource "google_compute_instance" "default" {
 }
 
 resource "google_compute_firewall" "http" {
-  project = var.project
   name    = "default-allow-http"
   network = "default"
 

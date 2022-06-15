@@ -11,14 +11,24 @@ terraform {
   }
 }
 
+provider "google" {
+  project = var.project_id
+  region  = "us-east1"
+  zone    = "us-east1-c"
+}
+
+data "google_client_config" "defaults" {
+  provider = google
+}
+
 ##########################################
 # Compute engine (NGINX Server)
 
 # module "computer_engine" {
 #   source = "./modules/computer_engine"
-#   project = google_project.fundamentals.project_id
-#   zone = var.zone
-#   region = var.region
+#   project = data.google_client_config.defaults.project
+# #   zone = var.zone
+# #   region = var.region
 
 #   instance_name = "my-vm-1"
 #   instance_type = "n1-standard-1"
@@ -30,10 +40,8 @@ terraform {
 
 module "lamp_server" {
   source = "./modules/lamp_server"
-  project = google_project.fundamentals.project_id
-  zone = var.zone
-  region = var.region
-
+  project = data.google_client_config.defaults.project
+  
   instance_name = "bloghost"
   instance_type = "n1-standard-1"
   startup_script = "apt-get update; apt-get install --no-install-recommends -y apache2 php php-mysql; service apache2 restart"
