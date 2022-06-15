@@ -30,7 +30,7 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  metadata_startup_script = var.startup_script
+  metadata_startup_script = file("${path.module}/../../startup_scripts/${var.startup_script}")
 
   depends_on = [time_sleep.api_init]
 }

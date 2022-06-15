@@ -32,7 +32,7 @@ data "google_client_config" "defaults" {
 
 #   instance_name = "my-vm-1"
 #   instance_type = "n1-standard-1"
-#   startup_script = "apt-get update; apt-get install --no-install-recommends -y nginx"
+#   startup_script = "compute_engine.sh"
 # }
 
 ##########################################
@@ -44,7 +44,7 @@ module "lamp_server" {
   
   instance_name = "bloghost"
   instance_type = "n1-standard-1"
-  startup_script = "apt-get update; apt-get install --no-install-recommends -y apache2 php php-mysql; service apache2 restart"
+  startup_script = "lamp_server.sh"
 
   db_password = var.db_password
 }
