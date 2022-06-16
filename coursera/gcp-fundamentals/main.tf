@@ -41,6 +41,7 @@ data "google_client_config" "defaults" {
 module "lamp_server" {
   source = "./modules/lamp_server"
   project = data.google_client_config.defaults.project
+  region = data.google_client_config.defaults.region
   
   instance_name = "bloghost"
   instance_type = "n1-standard-1"

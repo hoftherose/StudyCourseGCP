@@ -26,8 +26,8 @@ echo "<html>
 </html>" > /var/www/html/index.php
 
 service apache2 restart
-# sed -i "s/IMGSRC/${var.img_src}/" /var/www/html/index.php
-# sed -i "s/CLOUDSQLIP/${var.sql_ip}/" /var/www/html/index.php
-# sed -i "s/DBUSER/${var.db_user}/" /var/www/html/index.php
-# sed -i "s/DBPASSWORD/${var.db_password}/" /var/www/html/index.php
+# sudo sed -i "s/IMGSRC/${var.img_src}/" /var/www/html/index.php
+# sudo sed -i "s/CLOUDSQLIP/${var.sql_ip}/" /var/www/html/index.php
+# sudo sed -i "s/DBUSER/${var.db_user}/" /var/www/html/index.php
+# sudo sed -i "s/DBPASSWORD/${var.db_password}/" /var/www/html/index.php
 # http://storage.googleapis.com/cloud-training/gcpfci/my-excellent-blog.png
