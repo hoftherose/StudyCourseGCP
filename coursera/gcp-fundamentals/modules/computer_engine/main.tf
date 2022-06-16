@@ -40,10 +40,10 @@ resource "google_compute_firewall" "http" {
   network = "default"
 
   allow {
-      protocol = "tcp"
-      ports = ["80"]
+    protocol = "tcp"
+    ports    = ["80"]
   }
-  target_tags = ["http-server"]
+  target_tags   = ["http-server"]
   source_ranges = ["0.0.0.0/0"]
 
   depends_on = [time_sleep.api_init]

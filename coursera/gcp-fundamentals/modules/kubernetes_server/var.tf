@@ -19,11 +19,11 @@ variable "node_pool_name" {
 }
 
 variable "num_nodes" {
-  type = number
+  type    = number
   default = 1
 }
 
 variable "preemptible" {
-  type = bool
+  type    = bool
   default = true
 }

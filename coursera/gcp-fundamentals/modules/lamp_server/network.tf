@@ -1,6 +1,6 @@
 data "google_compute_network" "vpc" {
   project = var.project
-  name = "default"
+  name    = "default"
 }
 
 resource "google_compute_global_address" "private_ip_address" {

@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "gcs" {
-    bucket  = "gcp_fundamentals_tfstate"
+    bucket = "gcp_fundamentals_tfstate"
   }
 }
 
@@ -42,7 +42,7 @@ data "google_client_config" "defaults" {
 #   source = "./modules/lamp_server"
 #   project = data.google_client_config.defaults.project
 #   region = data.google_client_config.defaults.region
-  
+
 #   instance_name = "bloghost"
 #   instance_type = "n1-standard-1"
 #   startup_script = "lamp_server.sh"
@@ -54,11 +54,11 @@ data "google_client_config" "defaults" {
 # Kubernetes (Scalable Nginx K8 Server)
 
 module "k8_server" {
-  source = "./modules/kubernetes_server"
+  source  = "./modules/kubernetes_server"
   project = data.google_client_config.defaults.project
-  region = data.google_client_config.defaults.region
-  
-  cluster_name = "k8-clst"
+  region  = data.google_client_config.defaults.region
+
+  cluster_name   = "k8-clst"
   node_pool_name = "k8-np"
-  machine_type = "n1-standard-1"
+  machine_type   = "n1-standard-1"
 }

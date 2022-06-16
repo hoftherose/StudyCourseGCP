@@ -5,19 +5,19 @@ resource "null_resource" "enable_service_usage_api" {
 }
 
 module "computer_engine" {
-  source = "../computer_engine"
+  source  = "../computer_engine"
   project = var.project
 
-  instance_name = var.instance_name
-  instance_type = var.instance_type
+  instance_name  = var.instance_name
+  instance_type  = var.instance_type
   startup_script = var.startup_script
 }
 
 resource "google_sql_database_instance" "main" {
-  name             = "test"
-  database_version = "MYSQL_8_0"
+  name                = "test"
+  database_version    = "MYSQL_8_0"
   deletion_protection = false
-  region = var.region
+  region              = var.region
 
   settings {
     tier = "db-f1-micro"

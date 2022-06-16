@@ -1,5 +1,5 @@
 variable "project_id" {
-  type    = string
+  type = string
 }
 
 variable "billing_account" {
@@ -18,5 +18,5 @@ variable "billing_account" {
 # }
 
 variable "db_password" {
-  type    = string
+  type = string
 }
