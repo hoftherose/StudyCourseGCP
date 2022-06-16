@@ -38,14 +38,27 @@ data "google_client_config" "defaults" {
 ##########################################
 # Storage (LAMP Server) Manual steps to be taken in startup script
 
-module "lamp_server" {
-  source = "./modules/lamp_server"
+# module "lamp_server" {
+#   source = "./modules/lamp_server"
+#   project = data.google_client_config.defaults.project
+#   region = data.google_client_config.defaults.region
+  
+#   instance_name = "bloghost"
+#   instance_type = "n1-standard-1"
+#   startup_script = "lamp_server.sh"
+
+#   db_password = var.db_password
+# }
+
+##########################################
+# Kubernetes (Scalable Nginx K8 Server)
+
+module "k8_server" {
+  source = "./modules/kubernetes_server"
   project = data.google_client_config.defaults.project
   region = data.google_client_config.defaults.region
   
-  instance_name = "bloghost"
-  instance_type = "n1-standard-1"
-  startup_script = "lamp_server.sh"
-
-  db_password = var.db_password
+  cluster_name = "k8-clst"
+  node_pool_name = "k8-np"
+  machine_type = "n1-standard-1"
 }
