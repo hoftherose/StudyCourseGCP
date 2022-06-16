@@ -11,10 +11,6 @@ module "computer_engine" {
   instance_name = var.instance_name
   instance_type = var.instance_type
   startup_script = var.startup_script
-
-#   depends_on = [
-#     google_sql_database_instance.main
-#   ]
 }
 
 resource "google_sql_database_instance" "main" {
