@@ -48,16 +48,3 @@ resource "google_compute_firewall" "http" {
 
   depends_on = [time_sleep.api_init]
 }
-
-resource "google_compute_firewall" "mysql" {
-  name    = "default-allow-mysql"
-  network = "default"
-
-  allow {
-      protocol = "tcp"
-      ports = ["3306"]
-  }
-  source_ranges = ["0.0.0.0/0"]
-
-  depends_on = [time_sleep.api_init]
-}
