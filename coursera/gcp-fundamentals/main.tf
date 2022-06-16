@@ -36,7 +36,7 @@ data "google_client_config" "defaults" {
 # }
 
 ##########################################
-# Storage (LAMP Server)
+# Storage (LAMP Server) Manual steps to be taken in startup script
 
 module "lamp_server" {
   source = "./modules/lamp_server"
