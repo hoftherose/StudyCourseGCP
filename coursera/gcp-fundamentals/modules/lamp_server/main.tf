@@ -4,25 +4,6 @@ resource "null_resource" "enable_service_usage_api" {
   }
 }
 
-data "google_compute_network" "vpc" {
-  project = var.project
-  name = "default"
-}
-
-resource "google_compute_global_address" "private_ip_address" {
-  name          = "${data.google_compute_network.vpc.name}-ips"
-  purpose       = "VPC_PEERING"
-  address_type = "INTERNAL"
-  prefix_length = 16
-  network       = "${data.google_compute_network.vpc.name}"
-}
-
-resource "google_service_networking_connection" "private_vpc_connection" {
-  network       = "${data.google_compute_network.vpc.self_link}"
-  service       = "servicenetworking.googleapis.com"
-  reserved_peering_ranges = ["${google_compute_global_address.private_ip_address.name}"]
-}
-
 module "computer_engine" {
   source = "../computer_engine"
   project = var.project
@@ -31,15 +12,16 @@ module "computer_engine" {
   instance_type = var.instance_type
   startup_script = var.startup_script
 
-  depends_on = [
-    google_sql_database_instance.main
-  ]
+#   depends_on = [
+#     google_sql_database_instance.main
+#   ]
 }
 
 resource "google_sql_database_instance" "main" {
-  name             = "lamp-instance"
+  name             = "test"
   database_version = "MYSQL_8_0"
   deletion_protection = false
+  region = var.region
 
   settings {
     tier = "db-f1-micro"
