@@ -6,7 +6,7 @@ resource "null_resource" "enable_service_usage_api" {
 
 resource "google_container_cluster" "kubernetes" {
   name     = var.cluster_name
-  location = var.region
+  location = var.zone
 
   remove_default_node_pool = true
   initial_node_count       = 1
@@ -18,7 +18,7 @@ resource "google_container_cluster" "kubernetes" {
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   name       = var.node_pool_name
-  location   = var.region
+  location   = var.zone
   cluster    = google_container_cluster.kubernetes.name
   node_count = var.num_nodes
 

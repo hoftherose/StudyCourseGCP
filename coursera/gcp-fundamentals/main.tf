@@ -56,7 +56,7 @@ data "google_client_config" "defaults" {
 module "k8_server" {
   source  = "./modules/kubernetes_server"
   project = data.google_client_config.defaults.project
-  region  = data.google_client_config.defaults.region
+  zone  = data.google_client_config.defaults.zone
 
   cluster_name   = "k8-clst"
   node_pool_name = "k8-np"
