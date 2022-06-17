@@ -51,7 +51,7 @@ data "google_client_config" "defaults" {
 # }
 
 ##########################################
-# Kubernetes (Scalable Nginx K8 Server)
+# Kubernetes (Scalable Nginx K8 Server) run terraform then scripts/kubernetes_nginx.sh
 
 module "k8_server" {
   source  = "./modules/kubernetes_server"
