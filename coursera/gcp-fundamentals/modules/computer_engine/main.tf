@@ -1,7 +1,17 @@
-resource "null_resource" "enable_service_usage_api" {
-  provisioner "local-exec" {
-    command = "gcloud services enable serviceusage.googleapis.com compute.googleapis.com --project ${var.project}"
-  }
+# resource "null_resource" "enable_service_usage_api" {
+#   provisioner "local-exec" {
+#     command = "gcloud services enable serviceusage.googleapis.com compute.googleapis.com --project ${var.project}"
+#   }
+# }
+
+resource "google_project_service" "serviceusage" {
+  project = var.project
+  service = "serviceusage.googleapis.com"
+}
+
+resource "google_project_service" "compute" {
+  project = var.project
+  service = "compute.googleapis.com"
 }
 
 resource "time_sleep" "api_init" {

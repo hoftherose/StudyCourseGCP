@@ -1,7 +1,17 @@
-resource "null_resource" "enable_service_usage_api" {
-  provisioner "local-exec" {
-    command = "gcloud services enable sqladmin.googleapis.com servicenetworking.googleapis.com --project ${var.project}"
-  }
+# resource "null_resource" "enable_service_usage_api" {
+#   provisioner "local-exec" {
+#     command = "gcloud services enable sqladmin.googleapis.com servicenetworking.googleapis.com --project ${var.project}"
+#   }
+# }
+
+resource "google_project_service" "sqladmin" {
+  project = var.project
+  service = "sqladmin.googleapis.com"
+}
+
+resource "google_project_service" "servicenetworking" {
+  project = var.project
+  service = "servicenetworking.googleapis.com"
 }
 
 module "computer_engine" {
