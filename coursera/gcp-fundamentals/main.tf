@@ -53,12 +53,12 @@ data "google_client_config" "defaults" {
 ##########################################
 # Kubernetes (Scalable Nginx K8 Server) run terraform then scripts/kubernetes_nginx.sh
 
-module "k8_server" {
-  source  = "./modules/kubernetes_server"
-  project = data.google_client_config.defaults.project
-  zone  = data.google_client_config.defaults.zone
+# module "k8_server" {
+#   source  = "./modules/kubernetes_server"
+#   project = data.google_client_config.defaults.project
+#   zone  = data.google_client_config.defaults.zone
 
-  cluster_name   = "k8-clst"
-  node_pool_name = "k8-np"
-  machine_type   = "n1-standard-1"
-}
+#   cluster_name   = "k8-clst"
+#   node_pool_name = "k8-np"
+#   machine_type   = "n1-standard-1"
+# }

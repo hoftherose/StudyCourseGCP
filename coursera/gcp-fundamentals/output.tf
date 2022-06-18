@@ -6,9 +6,9 @@
 #   value = module.lamp_server.public_ip
 # }
 
-output "kubernetes_cluster_name" {
-  value = module.k8_server.kubernetes_cluster_name
-}
+# output "kubernetes_cluster_name" {
+#   value = module.k8_server.kubernetes_cluster_name
+# }
 
 output "zone" {
   value = data.google_client_config.defaults.zone
