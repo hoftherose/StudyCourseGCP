@@ -1,7 +1,17 @@
-resource "null_resource" "enable_service_usage_api" {
-  provisioner "local-exec" {
-    command = "gcloud services enable serviceusage.googleapis.com compute.googleapis.com --project ${var.project}"
-  }
+# resource "null_resource" "enable_service_usage_api" {
+#   provisioner "local-exec" {
+#     command = "gcloud services enable serviceusage.googleapis.com compute.googleapis.com --project ${var.project}"
+#   }
+# }
+
+resource "google_project_service" "serviceusage" {
+  project = var.project
+  service = "serviceusage.googleapis.com"
+}
+
+resource "google_project_service" "compute" {
+  project = var.project
+  service = "compute.googleapis.com"
 }
 
 resource "time_sleep" "api_init" {
@@ -30,7 +40,7 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  metadata_startup_script = file("${path.module}/../../startup_scripts/${var.startup_script}")
+  metadata_startup_script = file("${path.module}/../../scripts/${var.startup_script}")
 
   depends_on = [time_sleep.api_init]
 }
@@ -40,10 +50,10 @@ resource "google_compute_firewall" "http" {
   network = "default"
 
   allow {
-      protocol = "tcp"
-      ports = ["80"]
+    protocol = "tcp"
+    ports    = ["80"]
   }
-  target_tags = ["http-server"]
+  target_tags   = ["http-server"]
   source_ranges = ["0.0.0.0/0"]
 
   depends_on = [time_sleep.api_init]

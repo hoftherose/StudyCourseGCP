@@ -1,27 +1,33 @@
-resource "null_resource" "enable_service_usage_api" {
-  provisioner "local-exec" {
-    command = "gcloud services enable sqladmin.googleapis.com servicenetworking.googleapis.com --project ${var.project}"
-  }
+# resource "null_resource" "enable_service_usage_api" {
+#   provisioner "local-exec" {
+#     command = "gcloud services enable sqladmin.googleapis.com servicenetworking.googleapis.com --project ${var.project}"
+#   }
+# }
+
+resource "google_project_service" "sqladmin" {
+  project = var.project
+  service = "sqladmin.googleapis.com"
+}
+
+resource "google_project_service" "servicenetworking" {
+  project = var.project
+  service = "servicenetworking.googleapis.com"
 }
 
 module "computer_engine" {
-  source = "../computer_engine"
+  source  = "../computer_engine"
   project = var.project
 
-  instance_name = var.instance_name
-  instance_type = var.instance_type
+  instance_name  = var.instance_name
+  instance_type  = var.instance_type
   startup_script = var.startup_script
-
-#   depends_on = [
-#     google_sql_database_instance.main
-#   ]
 }
 
 resource "google_sql_database_instance" "main" {
-  name             = "test"
-  database_version = "MYSQL_8_0"
+  name                = "test"
+  database_version    = "MYSQL_8_0"
   deletion_protection = false
-  region = var.region
+  region              = var.region
 
   settings {
     tier = "db-f1-micro"
