@@ -9,9 +9,13 @@ variable "billing_account" {
 
 locals {
   region = "us-east1"
-  org_id = var.org_id
+
+  org_id       = var.org_id
   organization = "organizations/${local.org_id}"
-  billing_account = var.billing_account
+
   project_name = "billing-alerts"
-  project_id = "${local.project_name}-${random_integer.rand.result}"
+  project_id   = "${local.project_name}-${random_integer.rand.result}"
+
+  billing_account = var.billing_account
+  user            = "hector.delarosa@entrenandotech.xyz"
 }
