@@ -1,5 +1,5 @@
-# resource "google_pubsub_topic" "billing_pubsub_template" {
-#     project = google_project.billing_manager_template.project_id
+resource "google_pubsub_topic" "billing_pubsub" {
+  project = google_project.billing_project.project_id
 
-#     name = "BillingPubsubTemplate"
-# }
+  name = "BillingPubsub"
+}
