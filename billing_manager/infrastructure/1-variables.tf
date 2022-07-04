@@ -1,3 +1,7 @@
+variable "user" {
+  type = string
+}
+
 variable "org_id" {
   type = string
 }
@@ -5,6 +9,11 @@ variable "org_id" {
 variable "billing_account" {
   type    = string
   default = "My Billing Account"
+}
+
+variable "service_account" {
+  type        = string
+  description = "GCP Service Account to impersonate"
 }
 
 locals {
@@ -17,5 +26,6 @@ locals {
   project_id   = "${local.project_name}-${random_integer.rand.result}"
 
   billing_account = var.billing_account
-  user            = "hector.delarosa@entrenandotech.xyz"
+  user            = var.user
+  service_account = var.service_account
 }

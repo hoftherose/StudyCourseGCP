@@ -1,5 +1,8 @@
 provider "google" {
-  region = local.region
+  region                      = local.region
+  impersonate_service_account = local.service_account
+  # Setting up alerts requires a service account to use billingbudgets.googleapis.com
+  # credentials path setup in variables
 }
 
 resource "random_integer" "rand" {
