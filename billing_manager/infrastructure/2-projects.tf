@@ -16,7 +16,9 @@ data "google_billing_account" "account" {
   open         = true
 }
 
-# resource "google_project_service" "service_api" {
-#   project = google_project.billing_project.project_id
-#   service = local.project_apis
-# }
+resource "google_project_service" "service_api" {
+  for_each = toset(local.project_apis)
+
+  project = google_project.billing_project.project_id
+  service = each.key
+}
