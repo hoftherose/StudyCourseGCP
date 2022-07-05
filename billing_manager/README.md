@@ -8,8 +8,15 @@ Because the api _billingbudgets.googleapis.com_ does not work from GCloud SDK (f
 
 The service account to be impersonated must be created manually or through another script and added as a variable.
 
-This service account must have the following permissions:
+This service account must have the following roles and permissions:
+
+## Roles:
 
 - Billing Account User
 - Billing Account Viewer
 - Folder IAM Admin
+
+## Permissions:
+
+- billing.accounts.\*
+- billing.budgets.\*

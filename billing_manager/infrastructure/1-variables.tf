@@ -28,7 +28,18 @@ locals {
   billing_account = var.billing_account
   user            = var.user
   service_account = var.service_account
-  project_apis    = ["cloudresourcemanager.googleapis.com", "pubsub.googleapis.com", "cloudbilling.googleapis.com", "serviceusage.googleapis.com"]
-  
-  service_account_permissions    = ["roles/resourcemanager.folderEditor", "roles/billing.projectManager", "roles/resourcemanager.projectCreator", "roles/owner"]
+
+  project_apis = [
+    "cloudresourcemanager.googleapis.com",
+    "pubsub.googleapis.com",
+    "cloudbilling.googleapis.com",
+    "serviceusage.googleapis.com",
+    "billingbudgets.googleapis.com",
+  ]
+  service_account_permissions = [
+    "roles/resourcemanager.folderEditor",
+    "roles/billing.projectManager",
+    "roles/resourcemanager.projectCreator",
+    "roles/owner"
+  ]
 }

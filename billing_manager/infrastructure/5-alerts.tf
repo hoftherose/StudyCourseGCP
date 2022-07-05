@@ -3,7 +3,7 @@ resource "google_billing_budget" "budget_alert" {
   display_name    = "Example Billing Budget"
   amount {
     specified_amount {
-      currency_code = "MEX"
+      currency_code = "MXN"
       units         = "100"
     }
   }
