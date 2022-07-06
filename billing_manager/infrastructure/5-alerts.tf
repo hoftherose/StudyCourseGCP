@@ -25,6 +25,9 @@ resource "google_billing_budget" "budget_alert" {
     spend_basis       = "FORECASTED_SPEND"
   }
   all_updates_rule {
-    pubsub_topic = resource.google_pubsub_topic.billing_pubsub.id
+    monitoring_notification_channels = [
+      google_monitoring_notification_channel.monitoring_channel.id,
+    ]
+    disable_default_iam_recipients = true
   }
 }

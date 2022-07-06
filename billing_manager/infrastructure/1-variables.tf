@@ -35,6 +35,7 @@ locals {
     "cloudbilling.googleapis.com",
     "serviceusage.googleapis.com",
     "billingbudgets.googleapis.com",
+    "monitoring.googleapis.com",
   ]
   service_account_permissions = [
     "roles/resourcemanager.folderEditor",
