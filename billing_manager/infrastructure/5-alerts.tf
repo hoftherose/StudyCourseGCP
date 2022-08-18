@@ -24,6 +24,10 @@ resource "google_billing_budget" "budget_alert" {
     threshold_percent = 1.0
     spend_basis       = "FORECASTED_SPEND"
   }
+
+  budget_filter {
+    credit_types_treatment = "EXCLUDE_ALL_CREDITS"
+  }
   all_updates_rule {
     monitoring_notification_channels = [
       google_monitoring_notification_channel.monitoring_channel.id,
